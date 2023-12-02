@@ -1,17 +1,35 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MaterialApp(
+    home: NinjaCard(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class NinjaCard extends StatefulWidget {
+  const NinjaCard({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<NinjaCard> createState() => _NinjaCardState();
+}
+
+class _NinjaCardState extends State<NinjaCard> {
+  int ninjaLevel = 0;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              ninjaLevel += 1;
+            });
+          },
+          child: Icon(
+            Icons.add
+          ),
+        ),
         appBar: AppBar(
           backgroundColor: Colors.grey[850],
           centerTitle: true,
@@ -23,7 +41,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.grey,
-        body: const Padding(
+        body:  Padding(
           padding: EdgeInsets.fromLTRB(30, 50, 30, 50),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +83,7 @@ class MyApp extends StatelessWidget {
               ),
 
               Text(
-                'Level 40',
+                'Level $ninjaLevel',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0
@@ -99,7 +117,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
               Row(
-                children: [
+                children: const [
                   Icon(
                     Icons.email,
                     size: 20,
@@ -117,21 +135,6 @@ class MyApp extends StatelessWidget {
             ],
           ),
         ),
-      )
-    );
-  }
-}
-
-class MyCounter extends StatefulWidget {
-  const MyCounter({super.key});
-
-  @override
-  State<MyCounter> createState() => _MyCounterState();
-}
-
-class _MyCounterState extends State<MyCounter> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+      );
   }
 }
